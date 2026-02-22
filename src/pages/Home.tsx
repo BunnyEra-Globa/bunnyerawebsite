@@ -1,104 +1,87 @@
-import { Link } from 'react-router-dom'
-import Hero from '../components/Hero'
-import ProductCard, { type Product } from '../components/ProductCard'
+import Hero from '../components/Hero';
+import ProductCard from '../components/ProductCard';
 
-const featuredProducts: Product[] = [
+const products = [
   {
-    name: 'BunnyEra OS',
-    tagline: 'The OS built for the AI age',
-    description:
-      'A next-generation operating system designed with AI at its core. Seamless performance, unmatched security, and a developer-first experience.',
     icon: '🖥️',
-    features: [
-      'AI-assisted system management',
-      'Zero-trust security model',
-      'Lightning-fast boot (< 2 s)',
-      'Native container runtime',
-    ],
-    badge: 'New',
-  },
-  {
-    name: 'BunnyEra AI',
-    tagline: 'Your intelligent development co-pilot',
+    name: 'BunnyEra OS',
+    tagline: 'The AI-native operating system',
     description:
-      'State-of-the-art AI models integrated directly into your workflow. From code generation to smart analytics — BunnyEra AI does the heavy lifting.',
-    icon: '🤖',
+      'A next-generation operating system built from the ground up with AI at its core. Seamless, fast, and intelligent — designed for the modern developer and power user.',
     features: [
-      'Context-aware code completion',
-      'Natural language API queries',
-      'Automated code review',
-      'Multi-model support',
+      'AI-powered system assistant',
+      'Lightning-fast boot & performance',
+      'Built-in privacy & security',
+      'Universal app compatibility',
     ],
     badge: 'Beta',
   },
   {
-    name: 'BunnyEra Cloud',
-    tagline: 'Infinite scale, effortless deployment',
+    icon: '🤖',
+    name: 'BunnyEra AI',
+    tagline: 'Your intelligent companion',
     description:
-      'Enterprise-grade cloud infrastructure with global edge coverage, automatic scaling, and pay-as-you-go pricing built for modern applications.',
-    icon: '☁️',
+      'A multimodal AI platform that understands your context, supercharges your workflow, and integrates deeply with the rest of the BunnyEra ecosystem.',
     features: [
-      'Global edge network (150+ PoPs)',
-      '99.99% uptime SLA',
-      'One-click Kubernetes clusters',
-      'Integrated CDN & DDoS protection',
+      'Multimodal understanding',
+      'Deep ecosystem integration',
+      'Private, on-device inference',
+      'Extensible via plugins',
+    ],
+    badge: 'New',
+  },
+  {
+    icon: '☁️',
+    name: 'BunnyEra Cloud',
+    tagline: 'Infrastructure for the future',
+    description:
+      'A developer-first cloud platform with global reach. Deploy anywhere, scale infinitely, and power your AI workloads with our optimized infrastructure.',
+    features: [
+      'Global edge network',
+      'AI-optimized compute',
+      'One-click deployments',
+      'Pay-as-you-go pricing',
     ],
   },
-]
+];
 
 export default function Home() {
   return (
     <>
       <Hero />
 
-      {/* Featured products */}
-      <section className="py-20 sm:py-28 bg-gray-950">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="section-heading">Our Ecosystem</h2>
-            <p className="section-subheading mx-auto max-w-2xl">
-              Three powerful products. One unified platform. Everything you need to build, deploy, and
-              scale in the modern AI-driven world.
+      {/* Products section */}
+      <section className="py-24 bg-gray-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="section-title">The Ecosystem</h2>
+            <p className="section-subtitle">
+              Three products. One vision. A unified computing experience built for what's next.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.name} product={product} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {products.map((product) => (
+              <ProductCard key={product.name} {...product} />
             ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Link to="/products" className="btn-primary">
-              See All Products
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA section */}
-      <section className="relative overflow-hidden border-t border-gray-800 bg-gray-900 py-20">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 flex items-center justify-center"
-        >
-          <div className="h-96 w-96 rounded-full bg-brand-700/10 blur-3xl" />
-        </div>
-        <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <h2 className="section-heading">Ready to enter the BunnyEra?</h2>
-          <p className="section-subheading">
-            Start for free. Scale without limits. No credit card required.
+      {/* CTA Banner */}
+      <section className="py-20 bg-gradient-to-r from-primary-900/50 via-gray-900 to-primary-900/50 border-y border-gray-800">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to join the era?
+          </h2>
+          <p className="text-gray-400 mb-8">
+            Get early access to the BunnyEra ecosystem and help shape the future of computing.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="btn-primary text-base px-8 py-4">
-              Get Started Free
-            </Link>
-            <Link to="/pricing" className="btn-secondary text-base px-8 py-4">
-              View Pricing
-            </Link>
-          </div>
+          <a href="/contact" className="btn-primary text-base px-8 py-3.5">
+            Request Early Access
+          </a>
         </div>
       </section>
     </>
-  )
+  );
 }

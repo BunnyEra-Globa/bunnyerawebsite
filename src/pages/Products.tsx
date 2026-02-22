@@ -1,117 +1,86 @@
-import ProductCard, { type Product } from '../components/ProductCard'
+import ProductCard from '../components/ProductCard';
 
-const products: Product[] = [
+const products = [
   {
-    name: 'BunnyEra OS',
-    tagline: 'The OS built for the AI age',
-    description:
-      'BunnyEra OS redefines what an operating system can be. Powered by a microkernel architecture and an embedded AI engine, it delivers performance, security, and adaptability that traditional OS platforms simply cannot match.',
     icon: '🖥️',
-    features: [
-      'AI-assisted system management & diagnostics',
-      'Zero-trust security model out of the box',
-      'Lightning-fast boot time under 2 seconds',
-      'Native container and WASM runtime',
-      'Live kernel patching — zero downtime updates',
-      'Compatible with x86_64, ARM64 & RISC-V',
-    ],
-    badge: 'New',
-  },
-  {
-    name: 'BunnyEra AI',
-    tagline: 'Your intelligent development co-pilot',
+    name: 'BunnyEra OS',
+    tagline: 'The AI-native operating system',
     description:
-      'BunnyEra AI brings the most advanced language and code models directly into your workflow. Whether you are writing code, analyzing data, or building pipelines, BunnyEra AI accelerates every step.',
-    icon: '🤖',
+      'BunnyEra OS is engineered for the intelligence era. With an AI assistant embedded at the kernel level, a redesigned UI paradigm, and best-in-class privacy tooling, it\'s computing reimagined. Whether you\'re a developer, designer, or power user, BunnyEra OS adapts to your workflow.',
     features: [
-      'Context-aware code completion & generation',
-      'Natural language API queries and transformations',
-      'Automated code review with security analysis',
-      'Multi-model support: GPT, Claude, Llama, custom',
-      'Real-time analytics & anomaly detection',
-      'Private deployment options for enterprises',
+      'AI-powered system assistant built-in',
+      'Lightning-fast boot under 3 seconds',
+      'Unified notification & focus modes',
+      'End-to-end encrypted file system',
+      'Developer-first terminal & tools',
+      'Cross-platform app compatibility layer',
+      'Automatic updates with zero downtime',
     ],
     badge: 'Beta',
   },
   {
-    name: 'BunnyEra Cloud',
-    tagline: 'Infinite scale, effortless deployment',
+    icon: '🤖',
+    name: 'BunnyEra AI',
+    tagline: 'Your intelligent companion',
     description:
-      'BunnyEra Cloud provides a global, AI-optimized cloud infrastructure. From serverless functions to full Kubernetes clusters, deploy anywhere in the world with one command.',
+      'BunnyEra AI is a next-generation multimodal AI platform designed to understand your context, automate your repetitive tasks, and augment your creativity. It runs locally for privacy, integrates with BunnyEra OS and Cloud, and is fully extensible via a plugin marketplace.',
+    features: [
+      'Multimodal: text, image, audio, code',
+      'On-device inference for full privacy',
+      'Deep OS & Cloud integration',
+      'Plugin marketplace with 500+ extensions',
+      'Semantic search across all your files',
+      'Real-time collaboration co-pilot',
+      'Custom fine-tuning for your workflows',
+    ],
+    badge: 'New',
+  },
+  {
     icon: '☁️',
-    features: [
-      'Global edge network with 150+ PoPs',
-      '99.99% uptime SLA guaranteed',
-      'One-click Kubernetes cluster provisioning',
-      'Integrated CDN, WAF & DDoS protection',
-      'Autoscaling with predictive AI load balancing',
-      'Compliance: SOC 2, ISO 27001, GDPR',
-    ],
-  },
-  {
-    name: 'BunnyEra DevKit',
-    tagline: 'The complete developer toolkit',
+    name: 'BunnyEra Cloud',
+    tagline: 'Infrastructure for the future',
     description:
-      'Everything you need to build, test, and ship applications on the BunnyEra platform. SDKs, CLI tools, and a powerful local development environment.',
-    icon: '🛠️',
+      'BunnyEra Cloud is a developer-first cloud platform with a global edge network optimized for AI workloads. From serverless functions to GPU clusters, deploy your apps and models with a single command and scale to millions of users instantly.',
     features: [
-      'TypeScript, Python, Go, and Rust SDKs',
-      'Unified CLI for all BunnyEra services',
-      'Local emulation of cloud services',
-      'Built-in observability & tracing',
+      '200+ edge nodes worldwide',
+      'GPU-optimized AI inference clusters',
+      'Serverless functions with cold-start < 1ms',
+      'Managed databases & object storage',
+      'Built-in CI/CD pipelines',
+      'Auto-scaling & load balancing',
+      'SOC 2 Type II & ISO 27001 certified',
     ],
-    badge: 'Coming Soon',
   },
-  {
-    name: 'BunnyEra Insights',
-    tagline: 'Real-time business intelligence',
-    description:
-      'Transform raw data into actionable insights with BunnyEra Insights. AI-powered dashboards, custom reports, and streaming analytics at any scale.',
-    icon: '📊',
-    features: [
-      'AI-generated dashboards from natural language',
-      'Real-time streaming analytics pipeline',
-      'Custom report builder with export options',
-      'Anomaly detection & smart alerts',
-    ],
-    badge: 'Coming Soon',
-  },
-  {
-    name: 'BunnyEra Secure',
-    tagline: 'End-to-end security platform',
-    description:
-      'Protect your infrastructure and data with BunnyEra Secure — a unified security platform covering identity, access management, secrets, and compliance.',
-    icon: '🔒',
-    features: [
-      'Identity & access management (IAM)',
-      'Secrets manager with automatic rotation',
-      'Continuous compliance monitoring',
-      'Threat intelligence & SIEM integration',
-    ],
-    badge: 'Coming Soon',
-  },
-]
+];
 
 export default function Products() {
   return (
-    <div className="bg-gray-950 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-950 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="section-heading">Our Products</h1>
-          <p className="section-subheading">
-            A complete suite of products designed to work together — or independently — across every
-            layer of the modern technology stack.
+        <div className="text-center mb-16">
+          <h1 className="section-title">Our Products</h1>
+          <p className="section-subtitle">
+            A complete ecosystem of intelligent computing tools — built to work seamlessly together.
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Product grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {products.map((product) => (
-            <ProductCard key={product.name} product={product} />
+            <ProductCard key={product.name} {...product} />
           ))}
+        </div>
+
+        {/* Integration note */}
+        <div className="mt-20 p-8 rounded-2xl bg-gray-900 border border-gray-800 text-center">
+          <span className="text-4xl mb-4 block">🔗</span>
+          <h3 className="text-2xl font-bold text-white mb-3">Better Together</h3>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Every BunnyEra product is built to integrate seamlessly with the others. BunnyEra AI runs natively on BunnyEra OS. BunnyEra Cloud powers BunnyEra AI's cloud features. The whole is greater than the sum of its parts.
+          </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

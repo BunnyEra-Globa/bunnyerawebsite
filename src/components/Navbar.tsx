@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -7,94 +7,98 @@ const navLinks = [
   { to: '/pricing', label: 'Pricing' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
-]
+];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-gray-950/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img src="/bunny.svg" alt="BunnyEra logo" className="h-8 w-8" />
-          <span className="text-xl font-bold text-white">
-            Bunny<span className="text-brand-400">Era</span>
-          </span>
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex">
-          {navLinks.map(({ to, label }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end={to === '/'}
-              className={({ isActive }) =>
-                `rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-brand-900/50 text-brand-400'
-                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-                }`
-              }
-            >
-              {label}
-            </NavLink>
-          ))}
-        </nav>
-
-        {/* Desktop CTA */}
-        <div className="hidden md:flex">
-          <Link to="/contact" className="btn-primary">
-            Get Started
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur-md border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 group">
+            <span className="text-2xl">🐰</span>
+            <span className="text-xl font-bold text-white group-hover:text-primary-400 transition-colors">
+              BunnyEra
+            </span>
           </Link>
-        </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="rounded-lg p-2 text-gray-400 hover:bg-gray-800 hover:text-white md:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="border-t border-gray-800 bg-gray-950 px-4 pb-4 md:hidden">
-          <nav className="flex flex-col gap-1 pt-2">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map(({ to, label }) => (
               <NavLink
                 key={to}
                 to={to}
                 end={to === '/'}
-                onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  `rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                  `px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? 'bg-brand-900/50 text-brand-400'
-                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                      ? 'text-primary-400 bg-primary-950'
+                      : 'text-gray-400 hover:text-white hover:bg-gray-800'
                   }`
                 }
               >
                 {label}
               </NavLink>
             ))}
-            <Link to="/contact" className="btn-primary mt-2 w-full" onClick={() => setOpen(false)}>
+          </div>
+
+          {/* CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link to="/contact" className="btn-primary text-sm py-2 px-4">
               Get Started
             </Link>
-          </nav>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-gray-900 border-t border-gray-800 px-4 py-3 space-y-1">
+          {navLinks.map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              onClick={() => setMenuOpen(false)}
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? 'text-primary-400 bg-primary-950'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                }`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+          <Link
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="block mt-2 btn-primary text-sm text-center"
+          >
+            Get Started
+          </Link>
         </div>
       )}
-    </header>
-  )
+    </nav>
+  );
 }

@@ -1,107 +1,145 @@
-import PricingTable, { type Plan } from '../components/PricingTable'
+interface PricingTier {
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  features: string[];
+  cta: string;
+  highlighted?: boolean;
+}
 
-const plans: Plan[] = [
+const tiers: PricingTier[] = [
   {
     name: 'Starter',
     price: 'Free',
-    period: '',
-    description: 'Perfect for indie developers and small side projects.',
-    cta: 'Get Started Free',
+    period: 'forever',
+    description: 'Perfect for individuals exploring the BunnyEra ecosystem.',
     features: [
-      '1 project',
-      '3 GB cloud storage',
-      'BunnyEra AI — 100 queries/month',
-      'Shared compute (512 MB RAM)',
+      'BunnyEra OS (community edition)',
+      'BunnyEra AI — 100 requests/day',
+      'BunnyEra Cloud — 1 GB storage',
       'Community support',
-      'BunnyEra DevKit access',
+      '1 project',
     ],
+    cta: 'Get Started Free',
   },
   {
     name: 'Pro',
-    price: '$29',
-    period: 'month',
-    description: 'For professional developers and growing teams.',
-    cta: 'Start Pro Trial',
-    highlighted: true,
-    badge: 'Most Popular',
+    price: '$19',
+    period: 'per month',
+    description: 'For power users and professionals who need more.',
     features: [
+      'BunnyEra OS (full edition)',
+      'BunnyEra AI — unlimited requests',
+      'BunnyEra Cloud — 100 GB storage',
+      'Priority support',
       'Unlimited projects',
-      '100 GB cloud storage',
-      'BunnyEra AI — 10,000 queries/month',
-      'Dedicated compute (4 vCPU / 8 GB RAM)',
-      'BunnyEra OS — 3 device licences',
-      'Email & chat support',
-      'Custom domains',
+      'Plugin marketplace access',
       'Advanced analytics',
     ],
+    cta: 'Start Pro Trial',
+    highlighted: true,
   },
   {
     name: 'Enterprise',
     price: 'Custom',
-    period: '',
-    description: 'Tailored solutions for organisations at scale.',
-    cta: 'Contact Sales',
+    period: 'contact us',
+    description: 'For organizations that need scale, compliance, and dedicated support.',
     features: [
-      'Unlimited projects & storage',
-      'BunnyEra AI — unlimited queries',
-      'Unlimited compute clusters',
-      'BunnyEra OS — unlimited licences',
+      'Everything in Pro',
+      'Custom AI model fine-tuning',
+      'Dedicated cloud infrastructure',
+      'SLA-backed uptime guarantee',
+      'SSO & advanced security',
       'Dedicated account manager',
-      '99.99% SLA & priority support',
-      'Private cloud deployment',
-      'Custom compliance packages',
-      'SSO / SAML & advanced IAM',
+      'Custom billing & contracts',
     ],
+    cta: 'Contact Sales',
   },
-]
+];
+
+function CheckIcon() {
+  return (
+    <svg className="w-4 h-4 text-primary-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
 
 export default function Pricing() {
   return (
-    <div className="bg-gray-950 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-950 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="section-heading">Simple, Transparent Pricing</h1>
-          <p className="section-subheading">
-            Start for free. Scale as you grow. No hidden fees, no surprises.
+        <div className="text-center mb-16">
+          <h1 className="section-title">Simple, Transparent Pricing</h1>
+          <p className="section-subtitle">
+            Start free, scale as you grow. No hidden fees. Cancel anytime.
           </p>
         </div>
 
-        {/* Table */}
-        <div className="mt-16">
-          <PricingTable plans={plans} />
+        {/* Tiers */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {tiers.map((tier) => (
+            <div
+              key={tier.name}
+              className={`relative flex flex-col rounded-2xl p-8 border transition-colors ${
+                tier.highlighted
+                  ? 'bg-primary-900/30 border-primary-600 shadow-2xl shadow-primary-900/40'
+                  : 'bg-gray-900 border-gray-800 hover:border-gray-700'
+              }`}
+            >
+              {tier.highlighted && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                  <span className="px-4 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-white mb-1">{tier.name}</h3>
+                <div className="flex items-end gap-1 mb-2">
+                  <span className="text-4xl font-extrabold text-white">{tier.price}</span>
+                  <span className="text-gray-400 mb-1 text-sm">/ {tier.period}</span>
+                </div>
+                <p className="text-gray-400 text-sm">{tier.description}</p>
+              </div>
+
+              <ul className="space-y-3 mb-8 flex-1">
+                {tier.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-sm text-gray-300">
+                    <CheckIcon />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="/contact"
+                className={`w-full text-center py-3 rounded-lg font-semibold transition-colors text-sm ${
+                  tier.highlighted
+                    ? 'bg-primary-600 hover:bg-primary-500 text-white'
+                    : 'bg-gray-800 hover:bg-gray-700 text-gray-200'
+                }`}
+              >
+                {tier.cta}
+              </a>
+            </div>
+          ))}
         </div>
 
         {/* FAQ teaser */}
-        <div className="mt-20 rounded-2xl border border-gray-800 bg-gray-900 p-8 text-center">
-          <h2 className="text-xl font-bold text-white">Frequently Asked Questions</h2>
-          <div className="mt-8 grid gap-6 text-left sm:grid-cols-2">
-            {[
-              {
-                q: 'Can I change plans at any time?',
-                a: 'Yes. You can upgrade or downgrade at any time. Billing is prorated automatically.',
-              },
-              {
-                q: 'Is there a free trial for Pro?',
-                a: 'Yes — the Pro plan includes a 14-day free trial with no credit card required.',
-              },
-              {
-                q: 'What payment methods do you accept?',
-                a: 'We accept all major credit/debit cards, PayPal, and bank transfer for Enterprise plans.',
-              },
-              {
-                q: 'Do you offer non-profit or student discounts?',
-                a: 'Yes! Contact us with proof of eligibility for up to 80% off the Pro plan.',
-              },
-            ].map(({ q, a }) => (
-              <div key={q}>
-                <h3 className="font-semibold text-white">{q}</h3>
-                <p className="mt-2 text-sm text-gray-400">{a}</p>
-              </div>
-            ))}
-          </div>
+        <div className="mt-20 text-center">
+          <p className="text-gray-400">
+            Questions about pricing?{' '}
+            <a href="/contact" className="text-primary-400 hover:text-primary-300 font-medium">
+              Reach out to us
+            </a>{' '}
+            — we're happy to help.
+          </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
